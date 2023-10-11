@@ -37,8 +37,14 @@ func (srv *PessoaService) CriarPessoa(ctx context.Context, p *entities.Pessoa) e
 	return srv.Repo.CriarPessoa(ctx, *p)
 }
 
-func (srv *PessoaService) DetalhesPessoa(ctx context.Context) {}
+func (srv *PessoaService) DetalhesPessoa(ctx context.Context, id string) (entities.Pessoa, error) {
+	return srv.Repo.BuscarPessoaPorID(ctx, id)
+}
 
-func (srv *PessoaService) BuscarPessoa(ctx context.Context) {}
+func (srv *PessoaService) BuscarPessoa(ctx context.Context, search string) ([]entities.Pessoa, error) {
+	return srv.Repo.BuscarPessoas(ctx, search)
+}
 
-func (srv *PessoaService) TotalPessoasCadastradas(ctx context.Context) {}
+func (srv *PessoaService) TotalPessoasCadastradas(ctx context.Context) (int64, error) {
+	return srv.Repo.TotalPessoas(ctx)
+}
