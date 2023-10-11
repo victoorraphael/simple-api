@@ -12,6 +12,10 @@ type PessoaRepository struct {
 	db database.Provider[*pgx.Conn]
 }
 
+func New(provider database.Provider[*pgx.Conn]) *PessoaRepository {
+	return &PessoaRepository{db: provider}
+}
+
 func (repo *PessoaRepository) CriarPessoa(ctx context.Context, p entities.Pessoa) error {
 	tx, err := repo.db.Exec().Begin(ctx)
 	if err != nil {
