@@ -1,5 +1,4 @@
 resource "aws_instance" "frontend" {
-  availability_zone = var.region
   ami               = var.ami
   instance_type     = "t2.micro"
 
@@ -16,11 +15,10 @@ resource "aws_instance" "frontend" {
 }
 
 resource "aws_instance" "backend" {
-  availability_zone = var.region
   ami               = var.ami
   instance_type     = "t2.micro"
 
-  key_name = var.ssh_key_name
+  key_name = aws_key_pair.my_key_pair.key_name
   private_ip = "10.0.2.10"
   subnet_id  = aws_subnet.simpleapi_backend_subnet.id
   security_groups = [
@@ -33,8 +31,12 @@ resource "aws_instance" "backend" {
   }
 }
 
+resource "aws_eip" "lb" {
+  instance = aws_instance.backend.id
+  domain   = "vpc"
+}
+
 resource "aws_instance" "database" {
-  availability_zone = var.region
   ami               = var.ami
   instance_type     = "t2.micro"
 

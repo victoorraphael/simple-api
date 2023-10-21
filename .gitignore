@@ -2,3 +2,5 @@
 .vscode
 .infracost
 *.env
+/infra/aws/.terraform*
+/infra/aws/terraform*

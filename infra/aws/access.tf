@@ -1,4 +1,4 @@
-resource "aws_key_pair" "deployer" {
-  key_name   = "be_access_key"
-  public_key = var.ssh_pub
+resource "aws_key_pair" "my_key_pair" {
+  key_name   = var.ssh_key_name
+  public_key = file("~/.ssh/id_rsa.pub")
 }
