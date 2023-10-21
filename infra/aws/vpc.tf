@@ -10,7 +10,7 @@ resource "aws_vpc" "simpleapi_vpc" {
 }
 
 resource "aws_internet_gateway" "simpleapi_igw" {
-  vpc_id = aws_vpc.simpleapi_vpc
+  vpc_id = aws_vpc.simpleapi_vpc.id
 }
 
 

@@ -1,6 +1,6 @@
 # frontend
 resource "aws_subnet" "simpleapi_frontend_subnet" {
-  vpc_id = aws_vpc.simpleapi_vpc
+  vpc_id = aws_vpc.simpleapi_vpc.id
   cidr_block = "10.0.1.0/24"
   availability_zone = var.region
 
@@ -13,7 +13,7 @@ resource "aws_subnet" "simpleapi_frontend_subnet" {
 
 # backend
 resource "aws_subnet" "simpleapi_backend_subnet" {
-  vpc_id = aws_vpc.simpleapi_vpc
+  vpc_id = aws_vpc.simpleapi_vpc.id
   cidr_block = "10.0.2.0/24"
   availability_zone = var.region
 

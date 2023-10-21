@@ -31,6 +31,7 @@ resource "aws_security_group" "simpleapi_backend_sg" {
   ingress {
     from_port   = 9000
     to_port     = 9000
+    protocol = "tcp"
     cidr_blocks = ["10.0.1.0/24"] // frontend
   }
 
@@ -49,6 +50,7 @@ resource "aws_security_group" "simpleapi_database_sg" {
   ingress {
     from_port   = 5432
     to_port     = 5432
+    protocol = "tcp"
     cidr_blocks = ["10.0.2.0/24"] // backend
   }
 
