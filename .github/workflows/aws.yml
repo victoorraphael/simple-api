@@ -1,0 +1,20 @@
+name: Deploy on AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    environment: AWS
+
+    name: build application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
