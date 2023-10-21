@@ -20,6 +20,7 @@ resource "aws_instance" "backend" {
   ami               = var.ami
   instance_type     = "t3.medium"
 
+  key_name = var.ssh_key_name
   private_ip = "10.0.2.10/24"
   subnet_id  = aws_subnet.simpleapi_backend_subnet.id
   security_groups = [
