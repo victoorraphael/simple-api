@@ -9,7 +9,7 @@ variable "ami" {
 }
 
 variable "ssh_key_name" {
-  type = "string"
+  type = string
   default = "simpleapi_ssh"
 }
 
