@@ -1,7 +1,7 @@
 resource "aws_instance" "frontend" {
   availability_zone = var.region
   ami               = var.ami
-  instance_type     = "t3.medium"
+  instance_type     = "t2.micro"
 
   private_ip = "10.0.1.10/24"
   subnet_id  = aws_subnet.simpleapi_frontend_subnet.id
@@ -18,7 +18,7 @@ resource "aws_instance" "frontend" {
 resource "aws_instance" "backend" {
   availability_zone = var.region
   ami               = var.ami
-  instance_type     = "t3.medium"
+  instance_type     = "t2.micro"
 
   key_name = var.ssh_key_name
   private_ip = "10.0.2.10/24"
@@ -36,7 +36,7 @@ resource "aws_instance" "backend" {
 resource "aws_instance" "database" {
   availability_zone = var.region
   ami               = var.ami
-  instance_type     = "t3.medium"
+  instance_type     = "t2.micro"
 
   private_ip = "10.0.3.10/24"
   subnet_id  = aws_subnet.simpleapi_db_subnet.id
