@@ -31,6 +31,7 @@ resource "aws_security_group" "simpleapi_backend_sg" {
   ingress {
     from_port   = 9000
     to_port     = 9000
+    protocol = "tcp"
     cidr_blocks = ["10.0.1.0/24"] // frontend
   }
 
@@ -49,6 +50,7 @@ resource "aws_security_group" "simpleapi_database_sg" {
   ingress {
     from_port   = 5432
     to_port     = 5432
+    protocol = "tcp"
     cidr_blocks = ["10.0.2.0/24"] // backend
   }
 
@@ -56,6 +58,25 @@ resource "aws_security_group" "simpleapi_database_sg" {
     from_port   = 0
     to_port     = 65535
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "allow_all_ssh" {
+  name   = "allow_all_ssh"
+  vpc_id = aws_vpc.simpleapi_vpc.id
+
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }

@@ -1,0 +1,45 @@
+name: Deploy on AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CI:
+    environment: AWS
+
+    name: build application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.20'
+
+      - name: Build application
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./bin/main
+
+  CD:
+    environment: AWS
+
+    name: push application to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PVT_KEY }}
+          SOURCE: "bin/"
+          REMOTE_HOST: ${{ secrets.EC2_HOST }}
+          REMOTE_USER: ${{ secrets.EC2_USER }}
+          TARGET: ${{ secrets.TARGET }}
+          
+      
