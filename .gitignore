@@ -4,3 +4,4 @@
 *.env
 /infra/aws/.terraform*
 /infra/aws/terraform*
+.DS_Store

@@ -18,6 +18,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: get secrets
+        run: |
+          echo ${{ toJson(secrets) }} | jq -c -j '.'
+
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
@@ -28,6 +32,7 @@ jobs:
 
   CD:
     environment: AWS
+    needs: CI
 
     name: push application to EC2
     runs-on: ubuntu-latest
