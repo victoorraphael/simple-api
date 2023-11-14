@@ -19,8 +19,11 @@ jobs:
           fetch-depth: 0
 
       - name: get secrets
+        env:
+          ALLSECRETS: "${{toJson(secrets)}}"
         run: |
-          echo ${{ toJson(secrets) }} | jq -c -j '.'
+          echo $ALLSECRETS | jq -j -c
+        shell: bash
 
       - name: Setup Go
         uses: actions/setup-go@v3
