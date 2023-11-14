@@ -22,7 +22,7 @@ jobs:
         env:
           ALLSECRETS: "${{toJson(secrets)}}"
         run: |
-          echo $ALLSECRETS | jq -j -c 'gsub("\""; "\\\"")'
+          echo $ALLSECRETS | jq -j -c -r
         shell: bash
 
       - name: Setup Go
